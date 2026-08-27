@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>${tenantDisplayName} Dashboard</title>
+
+	<!--#include:top_head#pre-->
+
+	<link rel="stylesheet" href="${cdnBase}/theme.css">
+
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 0; background: #f7f8fa; color: #16181d; }
+		header { background: #16181d; color: #fff; padding: 1rem 1.5rem; }
+		main { padding: 1.5rem; display: grid; gap: 1rem; }
+		.card { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 1rem; }
+		button { font: inherit; padding: .5rem .9rem; border-radius: 6px; border: 1px solid #c3c8d1; background: #fff; cursor: pointer; }
+	</style>
+
+	<script>window.__APP_CONFIG__ = ${appConfigJson};</script>
+
+	<!--#include:top_head#post-->
+</head>
+<body>
+	<header style="display: flex; align-items: center; gap: .75rem;">
+		<img alt="" height="24" src="${cdnBase}/logo.svg" width="24">
+		<strong>${tenantDisplayName}</strong>
+	</header>
+
+	<main>
+		<section class="card">
+			<h2 style="margin-top: 0;">Widgets</h2>
+			<button onclick="refreshWidgets()">Refresh</button>
+			<div id="status">idle</div>
+		</section>
+
+		<section class="card">
+			<h2 style="margin-top: 0;">Extensions</h2>
+${extensionElements}
+		</section>
+
+		<section class="card">
+			<h2 style="margin-top: 0;">Analytics</h2>
+			<iframe height="120" src="${analyticsSrc}" style="border: 0; width: 100%;" title="Analytics"></iframe>
+		</section>
+
+		<section class="card" id="app"></section>
+	</main>
+
+	<!--#include:bottom#post-->
+
+	<!--#scriptData-->
+
+	<script src="/static/app.js" type="module"></script>
+</body>
+</html>

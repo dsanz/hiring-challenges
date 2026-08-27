@@ -1,0 +1,11 @@
+{
+	"name": "legacy-ticker",
+	"type": "customElement",
+	"htmlElementName": "legacy-ticker",
+	"urls": ["http://localhost:8081/legacy-ticker/index.js"],
+	"useESM": true,
+	"csp": {
+		"connect-src": ["http://localhost:8081"],
+		"script-src": ["'unsafe-eval'"]
+	}
+}

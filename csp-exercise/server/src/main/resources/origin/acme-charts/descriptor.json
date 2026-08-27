@@ -1,0 +1,11 @@
+{
+	"name": "acme-charts",
+	"type": "customElement",
+	"htmlElementName": "acme-charts",
+	"urls": ["http://localhost:8081/acme-charts/index.js"],
+	"useESM": true,
+	"csp": {
+		"connect-src": ["http://localhost:8081"],
+		"img-src": ["http://localhost:8081"]
+	}
+}

@@ -1,0 +1,5 @@
+.gradle/
+build/
+node_modules/
+server/src/main/resources/static/app.js
+test-results/

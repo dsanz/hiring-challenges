@@ -1,0 +1,50 @@
+plugins {
+	id "application"
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation "com.fasterxml.jackson.core:jackson-databind:2.18.2"
+	implementation "org.apache.tomcat.embed:tomcat-embed-core:10.1.34"
+	implementation "org.slf4j:slf4j-simple:2.0.16"
+
+	testImplementation "org.junit.jupiter:junit-jupiter:5.11.3"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+application {
+	mainClass = "com.example.host.HostServer"
+}
+
+test {
+	useJUnitPlatform()
+
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
+
+// The client bundle is built by Vite into server/src/main/resources/static.
+// `./gradlew run` builds it first so a fresh clone works with one command.
+
+tasks.register("buildClient", Exec) {
+	def clientDir = file("${rootDir}/client")
+
+	inputs.dir("${clientDir}/src")
+	inputs.file("${clientDir}/package.json")
+	outputs.file("${projectDir}/src/main/resources/static/app.js")
+
+	workingDir = clientDir
+	commandLine "sh", "-c", "npm install --no-audit --no-fund && npm run build"
+}
+
+processResources.dependsOn "buildClient"
