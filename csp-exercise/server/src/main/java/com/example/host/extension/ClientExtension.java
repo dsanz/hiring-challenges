@@ -15,13 +15,69 @@ import java.util.Map;
  * </p>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record ClientExtension(
-	String name, String type, String htmlElementName, List<String> urls,
-	boolean useESM, Map<String, List<String>> csp) {
+public class ClientExtension {
 
-	public ClientExtension {
-		urls = (urls == null) ? List.of() : List.copyOf(urls);
-		csp = (csp == null) ? Map.of() : Map.copyOf(csp);
+	public Map<String, List<String>> getCsp() {
+		if (_csp == null) {
+			return Map.of();
+		}
+
+		return _csp;
 	}
+
+	public String getHtmlElementName() {
+		return _htmlElementName;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getType() {
+		return _type;
+	}
+
+	public List<String> getUrls() {
+		if (_urls == null) {
+			return List.of();
+		}
+
+		return _urls;
+	}
+
+	public boolean isUseESM() {
+		return _useESM;
+	}
+
+	public void setCsp(Map<String, List<String>> csp) {
+		_csp = csp;
+	}
+
+	public void setHtmlElementName(String htmlElementName) {
+		_htmlElementName = htmlElementName;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
+	public void setUrls(List<String> urls) {
+		_urls = urls;
+	}
+
+	public void setUseESM(boolean useESM) {
+		_useESM = useESM;
+	}
+
+	private Map<String, List<String>> _csp;
+	private String _htmlElementName;
+	private String _name;
+	private String _type;
+	private List<String> _urls;
+	private boolean _useESM;
 
 }

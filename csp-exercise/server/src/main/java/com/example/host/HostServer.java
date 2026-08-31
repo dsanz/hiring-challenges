@@ -36,9 +36,14 @@ import org.apache.tomcat.util.descriptor.web.FilterMap;
  */
 public class HostServer {
 
-	public static final int ORIGIN_PORT = 8081;
+	/**
+	 * Defaults to 8080, with the extension origins on the next port up.
+	 * Override with <code>-Pport=8090</code> when something else already owns
+	 * it.
+	 */
+	public static final int PORT = Integer.getInteger("port", 8080);
 
-	public static final int PORT = 8080;
+	public static final int ORIGIN_PORT = PORT + 1;
 
 	public static void main(String[] args) throws Exception {
 		_startExtensionOrigins();

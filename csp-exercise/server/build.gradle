@@ -25,6 +25,10 @@ application {
 	mainClass = "com.example.host.HostServer"
 }
 
+tasks.named("run") {
+	systemProperty "port", project.findProperty("port") ?: "8080"
+}
+
 test {
 	useJUnitPlatform()
 

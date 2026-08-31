@@ -4,9 +4,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.example.host.HostServer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * Stands in for the third-party origins that publish client extensions. Runs on
@@ -59,7 +63,22 @@ public class ExtensionOriginServlet extends HttpServlet {
 
 			OutputStream outputStream = httpServletResponse.getOutputStream();
 
-			inputStream.transferTo(outputStream);
+			if (!pathInfo.endsWith(".json")) {
+				inputStream.transferTo(outputStream);
+
+				return;
+			}
+
+			// Descriptors name their own origin, which moves with the port.
+
+			String json = new String(
+				inputStream.readAllBytes(), StandardCharsets.UTF_8);
+
+			json = json.replace(
+				"${originBaseURL}",
+				"http://localhost:" + HostServer.ORIGIN_PORT);
+
+			outputStream.write(json.getBytes(StandardCharsets.UTF_8));
 		}
 	}
 

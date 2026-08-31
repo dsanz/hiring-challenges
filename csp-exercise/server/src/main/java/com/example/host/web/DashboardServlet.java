@@ -66,7 +66,7 @@ public class DashboardServlet extends HttpServlet {
 		model.put("cdnBase", _originBaseURL + "/cdn");
 		model.put(
 			"extensionElements", _getExtensionElements(clientExtensions));
-		model.put("tenantDisplayName", tenantConfig.displayName());
+		model.put("tenantDisplayName", tenantConfig.getDisplayName());
 
 		httpServletResponse.setContentType("text/html; charset=UTF-8");
 
@@ -97,13 +97,13 @@ public class DashboardServlet extends HttpServlet {
 		List<String> elements = new ArrayList<>();
 
 		for (ClientExtension clientExtension : clientExtensions) {
-			if (!"customElement".equals(clientExtension.type())) {
+			if (!"customElement".equals(clientExtension.getType())) {
 				continue;
 			}
 
 			elements.add(
-				"\t\t\t<" + clientExtension.htmlElementName() + "></" +
-					clientExtension.htmlElementName() + ">");
+				"\t\t\t<" + clientExtension.getHtmlElementName() + "></" +
+					clientExtension.getHtmlElementName() + ">");
 		}
 
 		return String.join("\n", elements);

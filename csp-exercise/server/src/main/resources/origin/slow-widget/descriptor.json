@@ -2,9 +2,9 @@
 	"name": "slow-widget",
 	"type": "customElement",
 	"htmlElementName": "slow-widget",
-	"urls": ["http://localhost:8081/slow-widget/index.js"],
+	"urls": ["${originBaseURL}/slow-widget/index.js"],
 	"useESM": true,
 	"csp": {
-		"img-src": ["http://localhost:8081"]
+		"img-src": ["${originBaseURL}"]
 	}
 }
