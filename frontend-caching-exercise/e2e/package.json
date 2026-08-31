@@ -1,0 +1,10 @@
+{
+	"name": "frontend-caching-exercise-e2e",
+	"private": true,
+	"scripts": {
+		"test": "playwright test"
+	},
+	"devDependencies": {
+		"@playwright/test": "1.54.2"
+	}
+}

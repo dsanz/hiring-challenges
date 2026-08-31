@@ -1,0 +1,6 @@
+.gradle/
+build/
+node_modules/
+server/src/main/resources/webcontexts/app-web/app.js
+server/src/main/resources/webcontexts/app-web/app.js.map
+test-results/

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>${tenantId} dashboard</title>
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 0; background: #f7f8fa; color: #16181d; }
+		header { background: #16181d; color: #fff; padding: 1rem 1.5rem; }
+		main { padding: 1.5rem; display: grid; gap: 1rem; max-width: 46rem; }
+		.card { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 1rem; }
+		dt { font-weight: 600; } dd { margin: 0 0 .5rem; font-family: ui-monospace, monospace; }
+		a { color: #2b5fd9; }
+	</style>
+</head>
+<body>
+	<header><strong>${tenantId}</strong> &middot; ${languageId}</header>
+
+	<main>
+		<section class="card">
+			<h2>Environment</h2>
+			<dl>
+				<dt>Tenant</dt><dd>${tenantId}</dd>
+				<dt>Caching strategy</dt><dd>${cachingStrategy}</dd>
+				<dt>Locale</dt><dd>${languageId}</dd>
+			</dl>
+			<p>
+				<a href="?locale=en_US">English</a> &middot;
+				<a href="?locale=es_ES">Spanish</a> &middot;
+				<a href="/t/acme/dashboard">acme</a> &middot;
+				<a href="/t/globex/dashboard">globex</a>
+			</p>
+		</section>
+
+		<section class="card">
+			<h2>Module manifest</h2>
+			<p>What the client resolves its imports through.</p>
+			<pre id="manifest"></pre>
+		</section>
+
+		<section class="card" id="app">Loading...</section>
+	</main>
+
+	<script>window.__MODULES__ = ${modulesJson};</script>
+
+	<script type="module" src="${appModuleURI}"></script>
+</body>
+</html>
