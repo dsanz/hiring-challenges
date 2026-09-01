@@ -1,0 +1,7 @@
+assemble:
+    -   from: build/static
+        into: static
+claim-decision-cell-renderer:
+    name: Claim Decision Cell Renderer
+    type: fdsCellRenderer
+    url: index.*.js

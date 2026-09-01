@@ -1,0 +1,13 @@
+{
+	"name": "vat-field-client-extension",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"typescript": "5.6.3",
+		"vite": "5.4.11"
+	}
+}

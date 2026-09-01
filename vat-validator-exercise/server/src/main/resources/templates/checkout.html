@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Checkout</title>
+	${clientExtensionHead}
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 0; background: #f7f8fa; color: #16181d; }
+		header { background: #16181d; color: #fff; padding: 1rem 1.5rem; }
+		main { padding: 1.5rem; display: grid; gap: 1rem; max-width: 44rem; }
+		.card { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 1rem; }
+		h2 { font-size: 1rem; margin: 0 0 .75rem; }
+		label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .25rem; }
+		input[type="text"] { font: inherit; padding: .45rem .6rem; border: 1px solid #c3c8d1; border-radius: 6px; width: 20rem; max-width: 100%; }
+		small { color: #6b7280; }
+	</style>
+</head>
+<body>
+	<header><strong>Checkout</strong> &middot; ${clientExtensionName}</header>
+
+	<main>
+		<section class="card">
+			<h2>Billing details</h2>
+			<label for="billing-company">Company</label>
+			<input id="billing-company" type="text" value="Acme GmbH">
+			<${htmlElementName} data-field="billing"></${htmlElementName}>
+		</section>
+
+		<section class="card">
+			<h2>Shipping details</h2>
+			<label for="shipping-company">Company</label>
+			<input id="shipping-company" type="text" value="Acme Logistics BV">
+			<${htmlElementName} data-field="shipping"></${htmlElementName}>
+		</section>
+
+		<section class="card">
+			<h2>Try these</h2>
+			<p><small>
+				<code>ESB12345678</code> and <code>NL004495445B01</code> are registered.
+				<code>DE811907980</code> is registered but its member state is slow.
+				Anything ending in <code>9</code> cannot be checked right now.
+				Everything else is unregistered.
+			</small></p>
+			<p><small>The registry allows ten lookups a minute.</small></p>
+		</section>
+	</main>
+</body>
+</html>

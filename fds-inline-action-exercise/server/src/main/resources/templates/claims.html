@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Expense claims</title>
+	<script src="/static/liferay.js"></script>
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 0; background: #f7f8fa; color: #16181d; }
+		header { background: #16181d; color: #fff; padding: 1rem 1.5rem; }
+		main { padding: 1.5rem; display: grid; gap: 1rem; max-width: 62rem; }
+		.card { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 1rem; }
+		h2 { font-size: 1rem; margin: 0 0 .75rem; }
+		table { border-collapse: collapse; width: 100%; }
+		th { text-align: left; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: #6b7280; border-bottom: 1px solid #e2e5ea; padding: .5rem .4rem; }
+		td { padding: .5rem .4rem; border-bottom: 1px solid #f0f2f5; vertical-align: middle; }
+		button { font: inherit; font-size: .85rem; padding: .3rem .7rem; border-radius: 6px; border: 1px solid #c3c8d1; background: #fff; cursor: pointer; }
+		button[disabled] { opacity: .5; cursor: default; }
+		.fds-pagination { display: flex; gap: .5rem; align-items: center; margin-top: .75rem; font-size: .85rem; color: #6b7280; }
+		.filters { display: flex; gap: .5rem; align-items: center; margin-bottom: .75rem; font-size: .85rem; }
+		small { color: #6b7280; }
+	</style>
+</head>
+<body>
+	<header><strong>Expense claims</strong> &middot; ${cellRendererName}</header>
+
+	<main>
+		<section class="card">
+			<h2>Awaiting approval</h2>
+
+			<div class="filters">
+				<label for="status">Status</label>
+				<select id="status">
+					<option value="Pending">Pending</option>
+					<option value="">All</option>
+					<option value="Approved">Approved</option>
+					<option value="Rejected">Rejected</option>
+				</select>
+			</div>
+
+			<div
+				data-api-url="/o/c/claims"
+				data-cell-renderer-url="${cellRendererURL}"
+				data-fds-id="claims"
+				data-status="Pending"
+				id="claims"
+			></div>
+		</section>
+
+		<section class="card">
+			<h2>Notes</h2>
+			<p><small>
+				Claims over 1000 need a second approver and cannot be approved from this table.
+				There are twelve claims and the table shows five at a time.
+			</small></p>
+		</section>
+	</main>
+
+	<script type="module">
+		import {mount} from '/static/fds.js';
+
+		const root = document.getElementById('claims');
+
+		mount(root);
+
+		document.getElementById('status').addEventListener('change', (event) => {
+			root.dataset.status = event.target.value;
+
+			root.textContent = '';
+
+			mount(root);
+		});
+	</script>
+</body>
+</html>

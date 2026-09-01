@@ -1,0 +1,13 @@
+assemble:
+    -   from: build/static
+        into: static
+vat-field:
+    friendlyURLMapping: vat-field
+    htmlElementName: vat-field
+    instanceable: true
+    name: VAT Field
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        -   index.*.js
+    useESM: true

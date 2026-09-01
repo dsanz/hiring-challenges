@@ -1,0 +1,55 @@
+plugins {
+	id "application"
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation "com.fasterxml.jackson.core:jackson-databind:2.18.2"
+	implementation "org.apache.tomcat.embed:tomcat-embed-core:10.1.34"
+	implementation "org.slf4j:slf4j-simple:2.0.16"
+	implementation "org.yaml:snakeyaml:2.3"
+
+	testImplementation "org.junit.jupiter:junit-jupiter:5.11.3"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+application {
+	mainClass = "com.example.fds.HostServer"
+}
+
+tasks.named("run") {
+	systemProperty "port", project.findProperty("port") ?: "8080"
+}
+
+test {
+	useJUnitPlatform()
+
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
+
+// The client extension is built by Vite into client-extension/build/static,
+// exactly where its client-extension.yaml says to assemble it from.
+
+tasks.register("buildClientExtension", Exec) {
+	def clientExtensionDir = file("${rootDir}/client-extension")
+
+	inputs.dir("${clientExtensionDir}/src")
+	inputs.file("${clientExtensionDir}/package.json")
+	outputs.dir("${clientExtensionDir}/build/static")
+
+	workingDir = clientExtensionDir
+	commandLine "sh", "-c", "npm install --no-audit --no-fund && npm run build"
+}
+
+processResources.dependsOn "buildClientExtension"
